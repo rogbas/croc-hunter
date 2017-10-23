@@ -8,7 +8,6 @@
     "hostname": "croc.k8.lab.rogbas.com"
   },
   "container_repo": {
-    "host": "docker.io",
     "master_acct": "rogbas",
     "alt_acct": "rogbas",
     "jenkins_creds_id": "docker_creds",
