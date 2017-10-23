@@ -98,14 +98,8 @@ volumes:[
 
       container('docker') {
 
-        // perform docker login to container registry as the docker-pipeline-plugin doesn't work with the next auth json format
-        withCredentials([[$class          : 'UsernamePasswordMultiBinding', credentialsId: config.container_repo.jenkins_creds_id,
-                        usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-          sh "docker login -u ${env.USERNAME} -p ${env.PASSWORD} ${config.container_repo.host}"
-        }
-
         // build and publish container
-        pipeline.containerBuildPub(
+      pipeline.containerBuildPub(
             dockerfile: config.container_repo.dockerfile,
             host      : config.container_repo.host,
             acct      : acct,
@@ -113,7 +107,7 @@ volumes:[
             tags      : image_tags_list,
             auth_id   : config.container_repo.jenkins_creds_id,
             image_scanning: config.container_repo.image_scanning
-        )
+      )
 
         // anchore image scanning configuration
         println "Add container image tags to anchore scanning list"
